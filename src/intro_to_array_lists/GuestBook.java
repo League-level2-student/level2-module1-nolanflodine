@@ -23,6 +23,7 @@ public class GuestBook implements ActionListener {
 	}
 	// Create a GUI with two buttons. One button reads "Add Name" and the other button reads "View Names". 
 		void meth(){
+		frame.setVisible(true);
 		button.addActionListener(this);
 		button2.addActionListener(this);
 		panel.add(button);
@@ -40,16 +41,17 @@ public class GuestBook implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
+			String s = "";
 		if(arg0.getSource().equals(button)) {
 	     String namess=JOptionPane.showInputDialog("Enter a name");
 	     names.add(namess);
+
 	  
 		}
 		if(arg0.getSource().equals(button2)) {
-			for (int i = 0; i < names.length; i++) {
-				String s = names[i];
+			for (int i = 0; i < names.size(); i++) {
+				 s+=names.get(i)+"\n";
 			}
 		}
-			JOptionPane.showMessageDialog(null, s);
 		}
 }
