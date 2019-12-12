@@ -100,16 +100,16 @@ void move() {
   //This is an incomplete switch statement:
   
   switch(direction) {
-  case "up":
+  case "UP":
     head.y=head.y-10; 
     break;
-  case "down":
+  case "DOWN":
     head.y=head.y+10; 
     break;
-  case "left":
+  case "LEFT":
    head.x=head.x-10; 
     break;
-  case "right":
+  case "RIGHT":
     head.x=head.x+10; 
     break;
   }
@@ -124,6 +124,20 @@ void move() {
 // 18. Complete the keyPressed method below. Use if statements to set your direction variable depending on what key is pressed.
 
 void keyPressed() {
+ if (key == CODED) {
+    if (keyCode == UP) {
+      direction = "UP";
+    }
+     else if (keyCode == DOWN){
+       direction = "DOWN";
+     }
+     else if (keyCode == LEFT){
+       direction = "LEFT";
+     }
+     else if (keyCode == RIGHT){
+       direction = "RIGHT";
+     }
+  }
 }
 
 
@@ -131,12 +145,24 @@ void keyPressed() {
 // 19. check if your head is out of bounds (teleport your snake head to the other side).
 
 void checkBoundaries() {
+  if (head.y<=0){
+    head.y = 499;
+  }
+  if (head.y>=500){
+    head.y = 1;
+  }
+  if(head.x<=0){
+    head.x = 499;
+  }
+  if(head.x>=0){
+    head.x = 1;
+  }
 }
 
 
 
 //20. Make sure that the key for your current direction’s opposite doesn’t work(i.e. If you’re going up, down key shouldn’t work)
-
+//it works
 
 
 // 21. Complete the missing parts of the collision method below.
