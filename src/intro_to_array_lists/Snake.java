@@ -2,7 +2,9 @@
 // 1. Follow the recipe instructions inside the Segment class.
 
 // The Segment class will be used to represent each part of the moving snake.
-
+int foodEaten=0;
+int idk=0;
+Segment segment;
 class Segment {
 
   //2. Create x and y member variables to hold the location of each segment.
@@ -115,7 +117,6 @@ void move() {
   }
   
 
-
   // 17. Call the checkBoundaries method to make sure the snake head doesn't go off the screen.
   checkBoundaries();
 }
@@ -154,7 +155,7 @@ void checkBoundaries() {
   if(head.x<=0){
     head.x = 499;
   }
-  if(head.x>=0){
+  if(head.x>=500){
     head.x = 1;
   }
 }
@@ -171,8 +172,13 @@ void collision() {
 
   // If the segment is colliding with a piece of food...
      // Increase the amount of food eaten and set foodX and foodY to new random locations.
-}
+if (head.x==foodX && head.y==foodY){
+  foodEaten++;
+  foodX = ((int)random(50)*10);
+  foodY = ((int)random(50)*10);
 
+}
+}
 
 
 /**
@@ -182,23 +188,28 @@ void collision() {
  **/
 
 //  1. Create and initialize an ArrayList of Segments. (This will be your snake tail!)
-
-
+ArrayList<Segment>segments= new ArrayList<Segment>();
 // 2. Complete the missing parts of the manageTail method below and call it in the draw method.
 
  void manageTail() {
 
   //Call the drawTail and checkTailCollision methods.
-
+drawTail();
+checkTailCollision();
   // Add a new Segment to your ArrayList that has the same X and Y as the head of your snake.
-
+segments.add(new Segment(head.x,head.y));
   // To keep your tail the right length:
   // while the tail size is greater than the number of food pieces eaten, remove the first Segment in your tail.
-
+while (segments.size()>foodEaten){
+  segments.remove(0);
+}
 }
 
 void drawTail() {
     // Draw a 10 by 10 rectangle for each Segment in your snake ArrayList.
+    for(int i = 0; i < segments.size(); i++){
+    rect(segments.get(i).x,segments.get(i).y,10,10);
+  }
 }
 
 
@@ -207,7 +218,11 @@ void drawTail() {
 void checkTailCollision() {
 
   // If your head has the same location as one of your segments...
-
+  for(int i = 0; i < segments.size(); i++){
+if (head.x==segment.x && head.y==segment.y){
+  foodEaten=0;
+}
+  }
   // reset your food variable
 
 
