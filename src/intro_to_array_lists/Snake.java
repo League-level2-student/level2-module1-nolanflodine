@@ -21,9 +21,16 @@ int getx(){
 }
 
 
-  int sety(){
+  int gety(){
 return y;
   }
+  void setx(int a){
+    this.x=a;
+  }
+  void sety(int a){
+    this.y=a;
+  }
+
   
 }
 
@@ -77,10 +84,12 @@ manageTail();
 drawFood();
 drawSnake();
 move();
+collision();
 }
 // 13. Complete the drawFood method below. (Hint: each piece of food should be a 10 by 10 rectangle).
 
 void drawFood() {
+  fill(255,0,0);
   rect(foodX,foodY,10,10);
 }
 
@@ -88,7 +97,8 @@ void drawFood() {
 //14. Draw the snake head (use a 10 by 10 rectangle)
 
 void drawSnake() {
-rect(250,250,10,10);
+  fill(0,255,0);
+rect(head.getx(),head.gety(),10,10);
 
   //test your code
 }
@@ -103,18 +113,23 @@ void move() {
   
   switch(direction) {
   case "UP":
-    head.y=head.y-10; 
+    head.sety(head.gety()-10); 
     break;
   case "DOWN":
-    head.y=head.y+10; 
+    head.sety(head.gety()+10); 
     break;
   case "LEFT":
-   head.x=head.x-10; 
+    head.setx(head.getx()-10); 
     break;
   case "RIGHT":
-    head.x=head.x+10; 
+    head.setx(head.getx()+10); 
     break;
   }
+        System.out.println(head.getx());
+         System.out.println(head.gety());
+
+
+  
   
 
   // 17. Call the checkBoundaries method to make sure the snake head doesn't go off the screen.
@@ -147,16 +162,16 @@ void keyPressed() {
 
 void checkBoundaries() {
   if (head.y<=0){
-    head.y = 499;
+    head.y = 490;
   }
-  if (head.y>=500){
-    head.y = 1;
+  if (head.y>=499){
+    head.y = 0;
   }
   if(head.x<=0){
-    head.x = 499;
+    head.x = 490;
   }
   if(head.x>=500){
-    head.x = 1;
+    head.x = 0;
   }
 }
 
@@ -197,7 +212,7 @@ ArrayList<Segment>segments= new ArrayList<Segment>();
 drawTail();
 checkTailCollision();
   // Add a new Segment to your ArrayList that has the same X and Y as the head of your snake.
-segments.add(new Segment(head.x,head.y));
+segments.add(new Segment(head.x-10,head.y-10));
   // To keep your tail the right length:
   // while the tail size is greater than the number of food pieces eaten, remove the first Segment in your tail.
 while (segments.size()>foodEaten){
@@ -219,7 +234,7 @@ void checkTailCollision() {
 
   // If your head has the same location as one of your segments...
   for(int i = 0; i < segments.size(); i++){
-if (head.x==segment.x && head.y==segment.y){
+if (head.x==segments.get(i).getx() && head.y==segments.get(i).getx()){
   foodEaten=0;
 }
   }
