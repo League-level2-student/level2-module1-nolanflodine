@@ -32,8 +32,15 @@ public class GamePanel extends JPanel {
 		 
 	 }
 	 void drawMenuState(Graphics g) { 
+		 Font newFont = new Font("Arial", Font.PLAIN, 20);
 		 g.setColor(Color.BLUE);
 		 g.fillRect(0, 0, SpaceInvadersRunner.WIDTH, SpaceInvadersRunner.HEIGHT);
+		 g.setFont(titleFont);
+		 g.setColor(Color.YELLOW);
+		 g.drawString("LEAGUE INVADERS", 20, 150);
+		 g.setFont(newFont);
+		 g.drawString("Press ENTER to start", 140, 400);
+
 	 }
 	 void drawGameState(Graphics g) { 
 		 
