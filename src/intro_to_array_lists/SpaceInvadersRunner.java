@@ -3,14 +3,16 @@ package intro_to_array_lists;
 import javax.swing.JFrame;
 
 public class SpaceInvadersRunner {
-	JFrame frame = new JFrame();
-	GamePanel panel = new GamePanel();
+	static JFrame frame = new JFrame();
+	static GamePanel panel = new GamePanel();
 	public static final int WIDTH = 500;
 	public static final int HEIGHT= 800;
 public static void main(String[] args) {
 	SpaceInvadersRunner s = new SpaceInvadersRunner();
+
 	s.setup();
-	
+	frame.addKeyListener(panel);
+
 }
 void setup() {
 	frame.setSize(WIDTH, HEIGHT);
