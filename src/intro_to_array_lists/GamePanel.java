@@ -18,7 +18,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	 final int END = 2;
 	 Rocketship r = new Rocketship(250, 500, 50, 50);
 	 int currentState = MENU;
-	 Timer frameDraw; 
+	 Timer frameDraw;
+	 ObjectManager o = new ObjectManager(r);
 	Font titleFont = new Font("Arial", Font.PLAIN, 48);
 	GamePanel(){
 		frameDraw=new Timer(1000/60,this);
@@ -39,7 +40,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		 
 	 }
 	 void updateGameState() {
-		 
+		o.update();
 	 }
 	 void updateEndState() {
 		 
@@ -60,7 +61,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	 void drawGameState(Graphics g) { 
 		 g.setColor(Color.BLACK);
 		 g.fillRect(0, 0, SpaceInvadersRunner.WIDTH, SpaceInvadersRunner.HEIGHT);
-		 r.draw(g);
+		 o.draw(g);
 
 	 }
 	 void drawEndState(Graphics g)  { 
@@ -93,6 +94,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
+		
 		
 	}
 	@Override

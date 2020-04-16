@@ -1,15 +1,15 @@
 package intro_to_array_lists;
 
 public class GameObject {
-	 int x;
-	 int y;
+	 static int x;
+	  static int y;
 	 int width;
 	 int height;
 	 int speed = 0;
-	 boolean isActive = true;
+	 static boolean isActive = true;
 	 public GameObject(int x, int y, int width, int height) {
-		 this.x = x;
-		 this.y = y;
+		 GameObject.x = x;
+		 GameObject.y = y;
 		 this.width = width;
 		 this.height = height;
 	 }
