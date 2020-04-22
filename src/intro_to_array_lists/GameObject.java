@@ -1,19 +1,24 @@
 package intro_to_array_lists;
 
+import java.awt.Rectangle;
+
 public class GameObject {
-	 static int x;
-	  static int y;
+	   int x;
+	    int y;
 	 int width;
 	 int height;
 	 int speed = 0;
-	 static boolean isActive = true;
+	 Rectangle collisionBox;
+	  boolean isActive = true;
 	 public GameObject(int x, int y, int width, int height) {
-		 GameObject.x = x;
-		 GameObject.y = y;
+		 this.x = x;
+		 this.y = y;
 		 this.width = width;
 		 this.height = height;
+		 //this.isActive = isActive;
+		 collisionBox = new Rectangle(x,y,width,height);
 	 }
 	 void update() {
-		 
+	      collisionBox.setBounds(x, y, width, height);
 	 }
 }

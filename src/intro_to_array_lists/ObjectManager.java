@@ -1,12 +1,12 @@
 package intro_to_array_lists;
 
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 
-public class ObjectManager {
+public class ObjectManager implements ActionListener {
 ArrayList<Projectile> projectiles;
 ArrayList<Alien> aliens;
 Random random;
@@ -23,22 +23,28 @@ Rocketship r;
 	void addAlien() {
 		aliens.add(new Alien(random.nextInt(SpaceInvadersRunner.WIDTH),0,50,50));
 	}
+	
 	void update() {
+		r.update();
 		for (int i = 0; i < aliens.size(); i++) {
 			aliens.get(i).update();
+			if (aliens.get(i).y>SpaceInvadersRunner.HEIGHT) {
+				aliens.get(i).isActive=false;
+				System.out.println("poof");
+		}
 		}
 		for (int i = 0; i < projectiles.size(); i++) {
 			projectiles.get(i).update();
-		}
-		if (Alien.y>SpaceInvadersRunner.HEIGHT||Alien.y<0) {
-			Alien.isActive=false;
-			System.out.println("poof");
-		}
-		if (Projectile.y>SpaceInvadersRunner.HEIGHT||Alien.y<0) {
-			Projectile.isActive=false;
-			System.out.println("poof");
-		}
-		}
+			if (projectiles.get(i).y>SpaceInvadersRunner.HEIGHT||projectiles.get(i).y<=0) {
+				projectiles.get(i).isActive=false;
+				System.out.println("poof");
+
+			}	
+			}
+		checkCollision();
+		purgeObjects();
+			}
+		
 	void draw(Graphics g) {
 		r.draw(g);
 		for (int i = 0; i < aliens.size(); i++) {
@@ -51,15 +57,38 @@ Rocketship r;
 	}
 	void purgeObjects() {
 		for (int i = 0; i < aliens.size(); i++) {
-			if(Alien.isActive==false) {
+			if(aliens.get(i).isActive==false) {
 				aliens.remove(i);
+ 				
 			}
 		}
 		for (int i = 0; i < projectiles.size(); i++) {
-			if(Projectile.isActive==false) {
+			if(projectiles.get(i).isActive==false) {
 				projectiles.remove(i);
 			}
 		}
+	}
+	
+	void checkCollision() {
+		for (int i = 0; i < aliens.size(); i++) {
+			if(r.collisionBox.intersects(aliens.get(i).collisionBox)) {
+				aliens.get(i).isActive = false;
+				r.isActive = false;
+			}
+			for (int j = 0; j < projectiles.size(); j++) {
+				if(projectiles.get(j).collisionBox.intersects(aliens.get(i).collisionBox)) {
+					projectiles.get(j).isActive = false;
+					aliens.get(i).isActive = false;
+				}
+			}
+		
+		}
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		addAlien();
 	}
 	}
 

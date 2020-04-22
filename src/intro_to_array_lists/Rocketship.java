@@ -18,6 +18,9 @@ public class Rocketship extends GameObject{
 		}
 		// TODO Auto-generated constructor stub
 	}
+	void update() {
+		super.update();
+	}
 	public void draw(Graphics g) {
 		if (gotImage) {
 			g.drawImage(image, x, y, width, height, null);
@@ -49,5 +52,8 @@ public class Rocketship extends GameObject{
             needImage = false;
         }
     }
+    public Projectile getProjectile() {
+        return new Projectile(x+width/2, y, 10, 10);
+} 
 
 }

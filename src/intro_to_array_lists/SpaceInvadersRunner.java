@@ -3,7 +3,7 @@ package intro_to_array_lists;
 import javax.swing.JFrame;
 
 public class SpaceInvadersRunner {
-	static JFrame frame = new JFrame();
+	 static JFrame frame = new JFrame();
 	static GamePanel panel = new GamePanel();
 	public static final int WIDTH = 500;
 	public static final int HEIGHT= 800;

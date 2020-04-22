@@ -12,7 +12,9 @@ public class Projectile extends GameObject {
 	public static boolean gotImage = false;	
 	public Projectile(int x, int y, int width, int height) {
 		super(x, y, width, height);
+		
 		speed = 10;
+		this.y=y;
 		if (needImage) {
 		    loadImage ("bullet.png");
 		}
@@ -20,6 +22,8 @@ public class Projectile extends GameObject {
 	}
 	void update() {
 		y-=speed;
+        super.update();
+
 	}
 	void draw(Graphics g) {
 		if (gotImage) {
