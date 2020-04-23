@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 import javax.swing.Box.Filler;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -131,6 +132,9 @@ public class GamePanel extends JPanel  implements ActionListener, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
+		if(currentState==MENU && e.getKeyCode()==KeyEvent.VK_SPACE) {
+			JOptionPane.showMessageDialog(null, "Pew Pew");
+		}
 		if (e.getKeyCode()==KeyEvent.VK_SPACE) {
 			o.addProjectile(r.getProjectile());
 		}
