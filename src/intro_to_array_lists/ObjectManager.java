@@ -10,6 +10,8 @@ public class ObjectManager implements ActionListener {
 ArrayList<Projectile> projectiles;
 ArrayList<Alien> aliens;
 Random random;
+int score = 0;
+String Score = "";
 Rocketship r;
 	public ObjectManager(Rocketship r) {
 		this.r =  r;
@@ -30,15 +32,12 @@ Rocketship r;
 			aliens.get(i).update();
 			if (aliens.get(i).y>SpaceInvadersRunner.HEIGHT) {
 				aliens.get(i).isActive=false;
-				System.out.println("poof");
 		}
 		}
 		for (int i = 0; i < projectiles.size(); i++) {
 			projectiles.get(i).update();
 			if (projectiles.get(i).y>SpaceInvadersRunner.HEIGHT||projectiles.get(i).y<=0) {
 				projectiles.get(i).isActive=false;
-				System.out.println("poof");
-
 			}	
 			}
 		checkCollision();
@@ -79,11 +78,21 @@ Rocketship r;
 				if(projectiles.get(j).collisionBox.intersects(aliens.get(i).collisionBox)) {
 					projectiles.get(j).isActive = false;
 					aliens.get(i).isActive = false;
+					score++;
+					Score = Integer.toString(score);
 				}
 			}
 		
 		}
 	}
+	
+	public String getScore() {
+		return Score;
+	}
+	public void setScore(String Score) {
+		this.Score = Score;
+	}
+
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {

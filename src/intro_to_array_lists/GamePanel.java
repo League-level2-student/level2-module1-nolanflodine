@@ -75,7 +75,10 @@ public class GamePanel extends JPanel  implements ActionListener, KeyListener {
 		 //g.fillRect(0, 0, SpaceInvadersRunner.WIDTH, SpaceInvadersRunner.HEIGHT);
 		 g.drawImage(image, 0, 0, SpaceInvadersRunner.WIDTH, SpaceInvadersRunner.HEIGHT, null);
 		 o.draw(g);
-
+		 Font newFont = new Font("Arial", Font.PLAIN, 20);
+		 g.setColor(Color.MAGENTA);
+		 g.setFont(newFont);
+		 g.drawString(o.getScore(), 20, 50);
 	 }
 	 void drawEndState(Graphics g)  { 
 		 Font newFont = new Font("Arial", Font.PLAIN, 20);
@@ -86,7 +89,7 @@ public class GamePanel extends JPanel  implements ActionListener, KeyListener {
 		 g.drawString("Game Over", 120, 150);
 		 g.setFont(newFont);
 		 g.drawString("Press ENTER to restart", 140, 400);
-		 g.drawString("You killed enemies", 150, 600);
+		 g.drawString("You killed " + o.getScore() + " enemies", 150, 600);
 
 
 	 }
@@ -135,34 +138,20 @@ public class GamePanel extends JPanel  implements ActionListener, KeyListener {
 		if (e.getKeyCode()==KeyEvent.VK_ENTER) {
 		    if (currentState == END) {
 		        currentState = MENU;
-		        System.out.println("menu");
+		        r = new Rocketship(250, 500, 50, 50);
+		        r.isActive = true;
+		        o = new ObjectManager(r);
 		    }
 		    else if(currentState == MENU){
 		    	currentState = GAME; 
 		    	startGame();
-		    	System.out.println("game");
 		    }
 		    else if(currentState == GAME){
 		    	currentState = END;	    
 		    	alienSpawn.stop();
-		    	System.out.println("end");
 		    }
 		} 
-		if (currentState==GAME) {
-			if (e.getKeyCode()==KeyEvent.VK_UP) {
-			    System.out.println("UP");
-			}
-			if (e.getKeyCode()==KeyEvent.VK_DOWN) {
-			    System.out.println("Down");
-			}
-			if (e.getKeyCode()==KeyEvent.VK_LEFT) {
-			    System.out.println("Left");
-			}
-			if (e.getKeyCode()==KeyEvent.VK_RIGHT) {
-			    System.out.println("Right");
-			}
-		}
-		
+		if (currentState==GAME) {		
 		if(r.y>10&&e.getKeyCode()==KeyEvent.VK_UP) {
 			r.up();
 		}
@@ -175,6 +164,7 @@ public class GamePanel extends JPanel  implements ActionListener, KeyListener {
 		if(r.x<430&&e.getKeyCode()==KeyEvent.VK_RIGHT) {
 			r.right();
 		}
+	}
 	}
 
 	@Override
